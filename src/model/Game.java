@@ -26,11 +26,12 @@ public class Game {
         return false;
     }
 
-    private boolean countChessInDir(Chess c, Direction dir) {
+    private boolean countChessInDir(Chess c, Direction dir, int count) {
+        // may return int for count so far
         boolean over = false;
         switch (dir) {
             case L:
-                //todo
+                //TODO
                 over = false;
                 break;
             case R:
@@ -42,16 +43,16 @@ public class Game {
             case B:
                 over = false;
                 break;
-            case LT:
+            case TL:
                 over = false;
                 break;
-            case LB:
+            case BL:
                 over = false;
                 break;
-            case RT:
+            case TR:
                 over = false;
                 break;
-            case RB:
+            case BR:
                 over = false;
                 break;
         }
