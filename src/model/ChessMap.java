@@ -8,7 +8,7 @@ public class ChessMap {
         pieces = new Chess[size][size];
     }
 
-    public void addChess(int x, int y, boolean color) {
+    public void putChess(int x, int y, boolean color) {
         Chess c = new Chess(x, y, color);
         pieces[x][y] = c;
     }

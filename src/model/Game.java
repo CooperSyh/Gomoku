@@ -1,6 +1,9 @@
 package model;
 
 public class Game {
+    private ChessMap Chess;
+    private boolean curColor;
+
     public boolean isOver() {
         return (checkVertical() || checkHorizontal() || checkDiagonal());
     }
