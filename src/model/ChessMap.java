@@ -12,5 +12,8 @@ public class ChessMap {
         Chess c = new Chess(x, y, color);
         pieces[x][y] = c;
     }
+    public Chess getChess(int x, int y){
+        return pieces[x][y];
+    }
 
 }

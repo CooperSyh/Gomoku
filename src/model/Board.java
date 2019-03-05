@@ -1,5 +1,7 @@
 package model;
 
-public class Board {
+import javax.swing.*;
+
+public class Board extends JFrame {
     private int size;
 }

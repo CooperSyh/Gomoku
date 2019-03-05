@@ -1,64 +1,69 @@
 package model;
 
 public class Game {
-    private ChessMap Chess;
+    private ChessMap pieces;
     private boolean curColor;
 
-    public boolean isOver() {
-        return (checkVertical() || checkHorizontal() || checkDiagonal());
+    public boolean isOver(Chess c) {
+        return (checkVertical(c) || checkHorizontal(c)
+                || checkLeftDiagonal(c)||checkRightDiagonal(c));
     }
 
-    private boolean checkVertical() {
-        return false;
-        //TODO: add check top and bot
+    private boolean checkVertical(Chess c) {
+        return countChessInDir(c,c,Direction.T,1);
     }
 
-    private boolean checkHorizontal() {
-        return false;
+    private boolean checkHorizontal(Chess c) {
+        return countChessInDir(c,c,Direction.L,1);
     }
 
-    private boolean checkDiagonal() {
-        return (checkLeftDiagonal() || checkRightDiagonal());
+    private boolean checkLeftDiagonal(Chess c) {
+        return countChessInDir(c,c,Direction.TL,1);
     }
 
-    private boolean checkLeftDiagonal() {
-        return false;
+    private boolean checkRightDiagonal(Chess c) {
+        return countChessInDir(c,c,Direction.TR,1);
     }
 
-    private boolean checkRightDiagonal() {
-        return false;
-    }
-
-    private boolean countChessInDir(Chess c, Direction dir, int count) {
-        // may return int for count so far
-        boolean over = false;
+    private boolean countChessInDir(Chess c, Chess cur, Direction dir, int count) {
+        if (count == 5)
+            return true;
+        Chess next;
+        int x = cur.getX();
+        int y = cur.getY();
+        boolean color = cur.getColor();
         switch (dir) {
             case L:
-                //TODO
-                over = false;
+                next = pieces.getChess(x-1,y);
+                if (next!=null && next.getColor()==color) {
+                    count++;
+                    countChessInDir(c, next, dir, count);
+                }
+                else
+                    countChessInDir(c,c,Direction.R,count);
                 break;
             case R:
-                over = false;
+                next = pieces.getChess(x+1,y);
+                if (next!=null && next.getColor()==color) {
+                    count++;
+                    countChessInDir(c, next, dir, count);
+                }
+                else
+                    return false;
                 break;
             case T:
-                over = false;
                 break;
             case B:
-                over = false;
                 break;
             case TL:
-                over = false;
                 break;
             case BL:
-                over = false;
                 break;
             case TR:
-                over = false;
                 break;
             case BR:
-                over = false;
                 break;
         }
-        return over;
+        return false;
     }
 }
