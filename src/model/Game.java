@@ -1,8 +1,19 @@
 package model;
 
 public class Game {
+    final static int size = 20;
     private ChessMap pieces;
     private boolean curColor;
+
+    public Game() {
+        pieces = new ChessMap(size);
+        curColor = false;
+    }
+
+    public void placePiece(int x, int y) {
+        pieces.putChess(x, y, curColor);
+        curColor = !curColor;
+    }
 
     public boolean isOver(Chess c) {
         return (checkVertical(c) || checkHorizontal(c)
@@ -28,41 +39,38 @@ public class Game {
     private boolean countChessInDir(Chess c, Chess cur, Direction dir, int count) {
         if (count == 5)
             return true;
-        Chess next;
-        int x = cur.getX();
-        int y = cur.getY();
-        boolean color = cur.getColor();
-        switch (dir) {
-            case L:
-                next = pieces.getChess(x-1,y);
-                if (next!=null && next.getColor()==color) {
+        else {
+            Chess next;
+            int x = cur.getX();
+            int y = cur.getY();
+            boolean color = cur.getColor();
+            if (dir == Direction.L) {
+                next = pieces.getChess(x - 1, y);
+                if (next != null && next.getColor() == color) {
                     count++;
-                    countChessInDir(c, next, dir, count);
-                }
-                else
-                    countChessInDir(c,c,Direction.R,count);
-                break;
-            case R:
-                next = pieces.getChess(x+1,y);
-                if (next!=null && next.getColor()==color) {
+                    return countChessInDir(c, next, dir, count);
+                } else
+                    return countChessInDir(c, c, Direction.R, count);
+            } else if (dir == Direction.R) {
+                next = pieces.getChess(x + 1, y);
+                if (next != null && next.getColor() == color) {
                     count++;
-                    countChessInDir(c, next, dir, count);
-                }
-                else
+                    return countChessInDir(c, next, dir, count);
+                } else
                     return false;
-                break;
-            case T:
-                break;
-            case B:
-                break;
-            case TL:
-                break;
-            case BL:
-                break;
-            case TR:
-                break;
-            case BR:
-                break;
+            } else if (dir == Direction.T) {
+
+            } else if (dir == Direction.B) {
+
+            } else if (dir == Direction.TL) {
+
+            } else if (dir == Direction.BL) {
+
+            } else if (dir == Direction.TR) {
+
+            } else if (dir == Direction.BR) {
+
+            }
         }
         return false;
     }
