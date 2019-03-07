@@ -59,17 +59,50 @@ public class Game {
                 } else
                     return false;
             } else if (dir == Direction.T) {
-
+                next = pieces.getChess(x, y+1);
+                if (next != null && next.getColor() == color) {
+                    count++;
+                    return countChessInDir(c, next, dir, count);
+                } else
+                    return countChessInDir(c, c, Direction.B, count);
             } else if (dir == Direction.B) {
-
+                next = pieces.getChess(x, y-1);
+                if (next != null && next.getColor() == color) {
+                    count++;
+                    return countChessInDir(c, next, dir, count);
+                } else
+                    return false;
             } else if (dir == Direction.TL) {
-
-            } else if (dir == Direction.BL) {
-
-            } else if (dir == Direction.TR) {
-
-            } else if (dir == Direction.BR) {
-
+                next = pieces.getChess(x-1, y+1);
+                if (next != null && next.getColor() == color) {
+                    count++;
+                    return countChessInDir(c, next, dir, count);
+                } else
+                    return countChessInDir(c, c, Direction.BR, count);
+            }
+            else if (dir == Direction.BR) {
+                next = pieces.getChess(x+1, y-1);
+                if (next != null && next.getColor() == color) {
+                    count++;
+                    return countChessInDir(c, next, dir, count);
+                } else
+                    return false;
+            }
+            else if (dir == Direction.TR) {
+                next = pieces.getChess(x+1, y+1);
+                if (next != null && next.getColor() == color) {
+                    count++;
+                    return countChessInDir(c, next, dir, count);
+                } else
+                    return countChessInDir(c, c, Direction.BL, count);
+            }
+            else if (dir == Direction.BL) {
+                next = pieces.getChess(x - 1, y - 1);
+                if (next != null && next.getColor() == color) {
+                    count++;
+                    return countChessInDir(c, next, dir, count);
+                } else
+                    return false;
             }
         }
         return false;
